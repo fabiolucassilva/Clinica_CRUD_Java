@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulário</title>
+        <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="css/estilo.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="medico.html">Medico</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="paciente.html">Paciente</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Consulta</a>
+            </li>
+        </ul>
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="administrador.html">Administrador</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="exames.html">Exames</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="especialidade.html">Especialidade</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tipo-exame.html">Tipo Exame</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tipo-plano.html">Tipo Plano</a>
+            </li>
+        </ul>
+
+        <div class="container">
+            <form action="" method="POST" class="formulario">
+                <div class="mb-3">
+                    <label for="funcao" class="form-label">Paciente*</label>
+                    <select class="form-select" aria-label="Default select example" required>
+                        <option selected disabled value="">Escolha uma opção</option>
+                        <option value="1">Gabriel Barbosa</option>
+                        <option value="2">Bruno Henrique</option>
+                        <option value="3">Everton Ribeiro</option>
+                        <option value="4">Rodrigo Caio</option>
+                        <option value="5">João Gomes</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="funcao" class="form-label">Medico*</label>
+                    <select class="form-select" aria-label="Default select example" required>
+                        <option selected disabled value="">Escolha uma opção</option>
+                        <option value="1">Arthur Antunes Coimbra</option>
+                        <option value="2">Leandro de Souza</option>
+                        <option value="3">Leovegildo Lins Júnior</option>
+                        <option value="3">Adílio de Oliveira Gonçalves</option>
+                        <option value="3">Raul Plassman</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="cpf" class="form-label">Data*</label>
+                    <input type="date" name="cpf" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1">Descrição</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div>
+                    <input type="submit" value="Enviar" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+
+        <script src="bootstrap/bootstrap.bundle.min.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,18 @@
+.centraliza{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+.formulario{
+    /*width: 300px;*/
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.titulo-index{
+    font-size: 80px;
+}
