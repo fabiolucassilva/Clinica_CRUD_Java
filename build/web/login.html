@@ -8,6 +8,17 @@
         <title>Formulário</title>
         <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
         <link href="css/estilo.css" rel="stylesheet">
+        
+        <script>
+            function mascara_cpf(){
+                var cpf = document.getElementById('cpf');
+                if(cpf.value.length === 3 || cpf.value.length === 7){
+                    cpf.value += ".";
+                }else if(cpf.value.length === 11){
+                    cpf.value += "-";
+                }
+            }
+        </script>
     </head>
 
     <body>
@@ -36,10 +47,10 @@
         </nav>
 
         <div class="container">
-            <form action="" method="POST" class="formulario">
+            <form action="ProcessaLogin" method="POST" class="formulario">
                 <div class="mb-3">
                     <label for="cpf" class="form-label">CPF*</label>
-                    <input type="text" name="cpf" class="form-control" required>
+                    <input type="text" maxlength ="14" name="cpf" id="cpf" class="form-control" onkeyup="mascara_cpf()" required>
                 </div>
                 <div class="mb-3">
                     <label for="senha" class="form-label">Senha*</label>
@@ -47,7 +58,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="funcao" class="form-label">Função*</label>
-                    <select class="form-select" aria-label="Default select example" required>
+                    <select class="form-select" name="funcao" aria-label="Default select example" required>
                         <option selected disabled value="">Escolha uma opção</option>
                         <option value="1">Paciente</option>
                         <option value="2">Médico</option>
@@ -61,6 +72,7 @@
         </div>
 
         <script src="bootstrap/bootstrap.bundle.min.js"></script>
+        
     </body>
 
 </html>
