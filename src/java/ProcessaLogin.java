@@ -6,11 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Fábio Lucas
- */
+
 @WebServlet(urlPatterns = {"/ProcessaLogin"})
 public class ProcessaLogin extends HttpServlet {
 
@@ -48,16 +46,31 @@ public class ProcessaLogin extends HttpServlet {
             
             if(request.getParameter("funcao").equals("1")){
                 /*Paciente*/
-                request.setAttribute("funcaorecebido", "Paciente");
+                if(cpf.equals("937.397.160-37")){
+                    HttpSession session = request.getSession();
+                    session.setAttribute("log", "paciente");
+                    
+                    request.setAttribute("funcaorecebido", "Paciente");
                 
-                RequestDispatcher rd = request.getRequestDispatcher("/portal_paciente.jsp");
-                rd.forward(request, response);
+                    RequestDispatcher rd = request.getRequestDispatcher("/portal_paciente.jsp");
+                    rd.forward(request, response);
+                }else{
+                    response.sendRedirect("login_erro.html");
+                }
+  
             }else if(request.getParameter("funcao").equals("2")){
                 /*Médico*/
-                request.setAttribute("funcaorecebido", "Médico");
-                
-                RequestDispatcher rd = request.getRequestDispatcher("/portal_medico.jsp");
-                rd.forward(request, response);
+                if(cpf.equals("381.585.150-53") || cpf.equals("693.339.230-98")){
+                    HttpSession session = request.getSession();
+                    session.setAttribute("log", "medico");
+                    
+                    request.setAttribute("funcaorecebido", "Médico");
+                    
+                    RequestDispatcher rd = request.getRequestDispatcher("/portal_medico.jsp");
+                    rd.forward(request, response);
+                }else{
+                    response.sendRedirect("login_erro.html");
+                }
             }else if(request.getParameter("funcao").equals("3")){
                 /*Administrador*/
                 response.sendRedirect("login_funcionalidade.html");

@@ -1,3 +1,10 @@
+<%-- 
+    Document   : login
+    Created on : 13/11/2022, 03:46:04
+    Author     : Fábio Lucas
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -65,18 +72,25 @@
                         <option value="3">Administrador</option>
                     </select>
                 </div>
-                <div class="alert alert-danger d-flex align-items-center" role="alert">
-                    <div>
-                      CPF ou Senha ou Função estão errados.
+                
+                <% Object logado = session.getAttribute("log");
+                if(logado.equals("nulo")){%>
+                    <div class="alert alert-primary" role="alert">
+                        O Logout foi realizado com sucesso
                     </div>
-                </div>
-                <div>
-                    <input type="submit" value="Entrar" class="btn btn-primary">
-                </div>
+                <%}%>
+                
+                    <div>
+                        <input type="submit" value="Entrar" class="btn btn-primary">
+                    </div>
+                
             </form>
+            <%--<%Object logado = session.getAttribute("log");
+              out.println(logado);%>--%>
         </div>
 
         <script src="bootstrap/bootstrap.bundle.min.js"></script>
+        
     </body>
 
 </html>
