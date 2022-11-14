@@ -74,12 +74,11 @@
                 </div>
                 
                 <% Object logado = session.getAttribute("log");
-                if(logado.equals("nulo")){%>
+                if(logado != "paciente" || logado != "medico"){%>
                     <div class="alert alert-primary" role="alert">
                         O Logout foi realizado com sucesso
                     </div>
                 <%}%>
-                
                     <div>
                         <input type="submit" value="Entrar" class="btn btn-primary">
                     </div>

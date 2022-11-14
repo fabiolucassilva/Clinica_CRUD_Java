@@ -15,8 +15,7 @@ public class ProcessaLogout extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setAttribute("log", "nulo");
-        //session.invalidate();
+        session.invalidate();
                 
         RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
         rd.forward(request, response);
