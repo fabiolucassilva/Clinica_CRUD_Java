@@ -1,3 +1,5 @@
+import aplicacao.Medico;
+import aplicacao.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -62,9 +64,6 @@ public class ProcessaLogin extends HttpServlet {
         if (cpf.isEmpty() || senha.isEmpty() || funcao.isEmpty()){
             response.sendRedirect("login_vazio.html");
         }else{
-            /*Adicionando atributos para jsp*/
-            request.setAttribute("cpfrecebido", cpf);
-            request.setAttribute("senharecebido", senha);
             
             if(request.getParameter("funcao").equals("1")){
                 /*Paciente*/
@@ -83,10 +82,13 @@ public class ProcessaLogin extends HttpServlet {
                     resultado.last();
 
                     if (resultado.getRow() > 0) {
+                        Paciente paciente = new Paciente(resultado.getInt("ID"),resultado.getString("NOME"),
+                            resultado.getString("CPF"),resultado.getString("AUTORIZADO"),resultado.getInt("IDTIPOPLANO") );
+                        
                         HttpSession session = request.getSession();
-                        session.setAttribute("log", "paciente");
-
-                        request.setAttribute("funcaorecebido", "Paciente");
+                        
+                        session.setAttribute("log", "log_paciente");
+                        session.setAttribute("paciente", paciente);
 
                         RequestDispatcher rd = request.getRequestDispatcher("/portal_paciente.jsp");
                         rd.forward(request, response);
@@ -117,10 +119,14 @@ public class ProcessaLogin extends HttpServlet {
                     resultado.last();
 
                     if (resultado.getRow() > 0) {
+                        Medico medico = new Medico(resultado.getInt("ID"),resultado.getString("NOME"),
+                            resultado.getString("CRM"), resultado.getString("ESTADOCRM"),
+                            resultado.getString("CPF"),resultado.getString("AUTORIZADO"),resultado.getInt("IDESPECIALIDADE") );
+                        
                         HttpSession session = request.getSession();
-                        session.setAttribute("log", "medico");
-
-                        request.setAttribute("funcaorecebido", "Médico");
+                        
+                        session.setAttribute("log", "log_medico");
+                        session.setAttribute("medico", medico);
 
                         RequestDispatcher rd = request.getRequestDispatcher("/portal_medico.jsp");
                         rd.forward(request, response);

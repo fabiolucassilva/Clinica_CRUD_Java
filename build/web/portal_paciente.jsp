@@ -1,10 +1,5 @@
-<%-- 
-    Document   : portal_paciente
-    Created on : 12/11/2022, 03:27:02
-    Author     : Fábio Lucas
---%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="aplicacao.Paciente" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,10 +17,10 @@
         if (logado != null){
             String aux = (String) logado;
             
-            if(aux.equals("medico")){
+            if(aux.equals("log_medico")){
                 response.sendRedirect("portal_medico.jsp");}
         
-            else if(aux.equals("paciente")){ %>
+            else if(aux.equals("log_paciente")){ %>
         
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
               <div class="container-fluid">
@@ -58,18 +53,32 @@
                 <div class="row align-items-start">
                   <div class="col">
                     <div class="info-user">
-                        <h1><%out.println(logado);%></h1>
+                        <%Paciente pacienteLogado = (Paciente) session.getAttribute("paciente");%>
+                        <h1>Bem vindo(a), <%out.println(pacienteLogado.getNome());%></h1>
+                        
+                        <BR>
+                        
+                        <h3>DADOS CADASTRAIS:</h3>
+                        
+                        <BR>
+                        
                         <p>
-                            CPF: 
-                            <%out.println(request.getAttribute("cpfrecebido"));%>
+                            ID: <%out.println(pacienteLogado.getId());%>
                         </p>
                         <p>
-                            SENHA: 
-                            <%out.println(request.getAttribute("senharecebido"));%>
+                            NOME: <%out.println(pacienteLogado.getNome());%>
                         </p>
                         <p>
-                            FUNÇÃO: 
-                            <%out.println(request.getAttribute("funcaorecebido"));%>
+                            CPF: <%out.println(pacienteLogado.getCpf());%>
+                        </p>
+                        <p>
+                            FUNÇÃO: Paciente
+                        </p>
+                        <p>
+                            AUTORIZADO: <%out.println(pacienteLogado.getAutorizado());%>
+                        </p>
+                        <p>
+                            ID TIPO PLANO: <%out.println(pacienteLogado.getTipoPlano());%>
                         </p>
                         
                     </div>
