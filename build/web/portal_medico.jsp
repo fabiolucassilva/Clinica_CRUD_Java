@@ -31,10 +31,10 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="portal_medico.jsp">Perfil Médico</a>
+                      <a class="nav-link active" aria-current="page" href="#">Perfil Médico</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Ver Consultas</a>
+                      <a class="nav-link active" href="ListaConsultas">Ver Consultas</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link active" href="#">Realizar Consulta</a>
@@ -52,7 +52,7 @@
             <div class="container">
                 <div class="row align-items-start">
                   <div class="col">
-                    <div class="info_user">
+                    <div class="formulario">
                         <%Medico medicoLogado = (Medico) session.getAttribute("medico");%>
                         <h1>Bem vindo(a), <%out.println(medicoLogado.getNome());%></h1>
                         

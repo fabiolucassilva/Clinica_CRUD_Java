@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="aplicacao.Medico" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="aplicacao.Paciente" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,16 +11,16 @@
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body>
+    <body>   
         <% 
             Object logado = session.getAttribute("log");
         if (logado != null){
             String aux = (String) logado;
             
-            if(aux.equals("log_paciente")){
-                response.sendRedirect("portal_paciente.jsp");}
+            if(aux.equals("log_medico")){
+                response.sendRedirect("portal_medico.jsp");}
         
-            else if(aux.equals("log_medico")){ %>
+            else if(aux.equals("log_paciente")){ %>
         
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
               <div class="container-fluid">
@@ -31,13 +31,13 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#">Perfil Médico</a>
+                      <a class="nav-link active" aria-current="page" href="portal_paciente.jsp">Perfil Cliente</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="ListaConsultas">Ver Consultas</a>
+                      <a class="nav-link active" href="#">Listar Consulta</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Realizar Consulta</a>
+                      <a class="nav-link active" href="#">Marcar Consulta</a>
                     </li>
                   </ul>
                   <span class="navbar-text">
@@ -52,47 +52,27 @@
             <div class="container">
                 <div class="row align-items-start">
                   <div class="col">
-                    <div class="formulario">
-                        <%Medico medicoLogado = (Medico) session.getAttribute("medico");%>
-                        <h1>Bem vindo(a), <%out.println(medicoLogado.getNome());%></h1>
+                    <div class="info-user">
                         
-                        <BR>
+                        <%Paciente pacienteLogado = (Paciente) session.getAttribute("paciente");%>
+                        <h1 style="margin-top: 35px; margin-bottom:15px;">Lista de consultas do(a) paciente <%out.println(pacienteLogado.getNome());%>:</h1>
                         
-                        <h3>DADOS CADASTRAIS:</h3>
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <div>
+                              OPS! Não foi possivel listar suas consultas.
+                            </div>
+                        </div>
                         
-                        <BR>
-                        
-                        <p>
-                            ID: <%out.println(medicoLogado.getId());%>
-                        </p>
-                        <p>
-                            NOME: <%out.println(medicoLogado.getNome());%>
-                        </p>
-                        <p>
-                            CRM: <%out.println(medicoLogado.getCrm());%>
-                        </p>
-                        <p>
-                            ESTADO CRM: <%out.println(medicoLogado.getEstadoCrm());%>
-                        </p>
-                        <p>
-                            CPF: <%out.println(medicoLogado.getCpf());%>
-                        </p>
-                        <p>
-                            FUNÇÃO: Médico
-                        </p>
-                        <p>
-                            ID TIPO ESPECIALIDADE: <%out.println(medicoLogado.getTipoEspecialidade());%>
-                        </p>
                     </div>
                   </div>
                 </div>
             </div>
-                    
-        <%}
-        else{response.sendRedirect("login_restrito.html");}
+                        
+        <%}else{response.sendRedirect("login_restrito.html");}
         }else{response.sendRedirect("login_restrito.html");}%>
             <%--<jsp:forward page="login_restrito"/>--%>
         
         <script src="bootstrap/bootstrap.bundle.min.js"></script>
     </body>
 </html>
+

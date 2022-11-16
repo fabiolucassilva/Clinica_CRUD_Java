@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="aplicacao.Consulta"%>
+<%@page import="aplicacao.Consulta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" import="aplicacao.Paciente" %>
 
 <!DOCTYPE html>
@@ -31,10 +34,10 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#">Perfil Cliente</a>
+                      <a class="nav-link active" aria-current="page" href="portal_paciente.jsp">Perfil Cliente</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="ListaConsultas">Listar Consulta</a>
+                      <a class="nav-link active" href="#">Listar Consulta</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link active" href="#">Marcar Consulta</a>
@@ -52,34 +55,55 @@
             <div class="container">
                 <div class="row align-items-start">
                   <div class="col">
-                    <div class="formulario">
+                    <div class="info-user">
                         <%Paciente pacienteLogado = (Paciente) session.getAttribute("paciente");%>
-                        <h1>Bem vindo(a), <%out.println(pacienteLogado.getNome());%></h1>
+                        <h1 style="margin-top: 35px; margin-bottom:15px;">Lista de consultas do(a) paciente <%out.println(pacienteLogado.getNome());%>:</h1>
                         
-                        <BR>
+                        <br>
                         
-                        <h3>DADOS CADASTRAIS:</h3>
+                        <%
+                        ArrayList<Consulta> ListaConsulta = (ArrayList<Consulta>) request.getAttribute("listaConsultas");
                         
-                        <BR>
+                        if(ListaConsulta.size()>0){
+                        %>
                         
-                        <p>
-                            ID: <%out.println(pacienteLogado.getId());%>
-                        </p>
-                        <p>
-                            NOME: <%out.println(pacienteLogado.getNome());%>
-                        </p>
-                        <p>
-                            CPF: <%out.println(pacienteLogado.getCpf());%>
-                        </p>
-                        <p>
-                            FUNÇÃO: Paciente
-                        </p>
-                        <p>
-                            AUTORIZADO: <%out.println(pacienteLogado.getAutorizado());%>
-                        </p>
-                        <p>
-                            ID TIPO PLANO: <%out.println(pacienteLogado.getTipoPlano());%>
-                        </p>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">DATA</th>
+                                    <th scope="col">DESCRIÇÃO</th>
+                                    <th scope="col">REALIZADA</th>
+                                    <th scope="col">ID MÉDICO</th>
+                                    <th scope="col">ID PACIENTE</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <%
+                                      for(int i = 0; i < ListaConsulta.size() ; i++){
+                                          Consulta consul = ListaConsulta.get(0);
+                                  %>
+                                  <tr>
+                                    <th scope="row"> <%out.print(consul.getId());%> </th>
+                                    <td> <%out.print(consul.getData());%></td>
+                                    <td> <%out.print(consul.getDesc());%> </td>
+                                    <td> <%out.print(consul.getRealizada());%> </td>
+                                    <td> <%out.print(consul.getIdMedico());%> </td>
+                                    <td> <%out.print(consul.getIdPaciente());%> </td>
+                                  </tr>
+                                  <%
+                                    }
+                                  %>
+                                </tbody>
+                              </table>
+                          </div>
+                          <%    
+                          }else{%>
+                            <div class="alert alert-primary" role="alert">
+                                Você não possui nenhuma consulta.
+                            </div>
+                          <%}%>
                         
                     </div>
                   </div>
