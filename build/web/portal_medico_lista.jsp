@@ -39,7 +39,7 @@
                       <a class="nav-link active" href="#">Ver Consultas</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Realizar Consulta</a>
+                      <a class="nav-link active" href="ListaConsultasRealizar">Realizar Consulta</a>
                     </li>
                   </ul>
                   <span class="navbar-text">

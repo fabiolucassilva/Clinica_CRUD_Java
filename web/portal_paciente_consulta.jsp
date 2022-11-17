@@ -81,14 +81,11 @@
                                     ArrayList<Medico> ListaMedico = (ArrayList<Medico>) request.getAttribute("listaMedicos");
 
                                     if(ListaMedico.size()>0){
-                                        
-                                       int c;
                                     
                                       for(int i = 0; i < ListaMedico.size() ; i++){
                                           Medico medic = ListaMedico.get(i);
-                                          c = i;
                                     %>
-                                    <option value="<%c++;%>"><%out.print(medic.getNome());%> (<%out.print(medic.getTipoEspecialidade());%>)</option>
+                                    <option value="<%medic.getId();%>"><%out.print(medic.getNome());%> (<%out.print(medic.getTipoEspecialidade());%>)</option>
                                         <%}
                                     }%>
                                     

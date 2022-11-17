@@ -1,3 +1,4 @@
+<%@page import="aplicacao.TipoExame"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="aplicacao.Consulta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" import="aplicacao.Medico" %>
@@ -36,7 +37,7 @@
                       <a class="nav-link active" aria-current="page" href="portal_medico.jsp">Perfil Médico</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Ver Consultas</a>
+                      <a class="nav-link active" href="ListaConsultas">Ver Consultas</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link active" href="ListaConsultasRealizar">Realizar Consulta</a>
@@ -56,16 +57,68 @@
                   <div class="col">
                     <div class="info_user">
                         
-                        <%Medico pacienteLogado = (Medico) session.getAttribute("medico");%>
-                        <h1 style="margin-top: 35px; margin-bottom:15px;">Lista de consultas do(a) Médico(a) <%out.println(pacienteLogado.getNome());%>:</h1>
+                        <h1 style="margin-top: 35px; margin-bottom:-15px;">Realizar a consulta:</h1>
                         
-                        <Br>
+                        <br>
                         
                         <%
                         ArrayList<Consulta> ListaConsulta = (ArrayList<Consulta>) request.getAttribute("listaConsultas");
                         
                         if(ListaConsulta.size()>0){
                         %>
+                        
+                        <form action="MarcaConsulta" method="POST" class="formulario">
+                        
+                            <div class="mb-3">
+                                <label for="funcao" class="form-label">Id da Consulta que será realizada (data)*</label>
+                                <select class="form-select" aria-label="Default select example" required>
+                                    <option selected disabled value="IdConsulta">Escolha uma opção</option>
+                                    <%
+                                    if(ListaConsulta.size()>0){
+                                        
+                                      for(int i = 0; i < ListaConsulta.size() ; i++){
+                                          Consulta consult = ListaConsulta.get(i);
+                                    %>
+                                    <option value="<%consult.getId();%>"><%out.print(consult.getId());%> (<%out.print(consult.getData());%>)</option>
+                                        <%}
+                                    }%>
+                                    
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="funcao" class="form-label">Exame da Consulta que será realizada*</label>
+                                <select class="form-select" aria-label="Default select example" required>
+                                    <option selected disabled value="IdTipoExame">Escolha uma opção</option>
+                                    <%
+                                    ArrayList<TipoExame> ListaTipoExame = (ArrayList<TipoExame>) request.getAttribute("listaTipoExame");
+                        
+                                    if(ListaTipoExame.size()>0){
+                                        
+                                      for(int i = 0; i < ListaTipoExame.size() ; i++){
+                                          TipoExame tipoExame = ListaTipoExame.get(i);
+                                    %>
+                                    <option value="<%tipoExame.getId();%>"><%out.print(tipoExame.getDesc());%></option>
+                                        <%}
+                                    }%>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="desc" class="form-label">Descrição da Consulta que será realizada*</label>
+                                <input type="text" name="desc" class="form-control" required>
+                            </div>
+
+                            <div>
+                                <input type="submit" value="Realizar a consulta" class="btn btn-primary">
+                            </div>
+                            
+                        </form>
+                        
+                        <%Medico pacienteLogado = (Medico) session.getAttribute("medico");%>
+                        <h3 style="margin-top: 35px; margin-bottom:15px;">Consultas ainda não realizadas do(a) Médico(a) <%out.println(pacienteLogado.getNome());%>:</h3>
+                        
+                        <Br>
                         
                         <div class="table-responsive">
                             <table class="table">
@@ -100,10 +153,13 @@
                           </div>
                           <%    
                           }else{%>
-                            <div class="alert alert-primary" role="alert">
-                                Você não possui nenhuma consulta.
+                            <div class="alert alert-primary" role="alert" style="margin-top: 35px;">
+                                Você não possui nenhuma consulta para ser realizada.
                             </div>
                           <%}%>
+                          
+                          <br>
+                          <br>
                         
                     </div>
                   </div>

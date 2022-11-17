@@ -1,3 +1,6 @@
+<%@page import="aplicacao.TipoExame"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="aplicacao.Consulta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" import="aplicacao.Medico" %>
 
 <!DOCTYPE html>
@@ -31,7 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#">Perfil Médico</a>
+                      <a class="nav-link active" aria-current="page" href="portal_medico.jsp">Perfil Médico</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link active" href="ListaConsultas">Ver Consultas</a>
@@ -52,37 +55,17 @@
             <div class="container">
                 <div class="row align-items-start">
                   <div class="col">
-                    <div class="formulario">
-                        <%Medico medicoLogado = (Medico) session.getAttribute("medico");%>
-                        <h1>Bem vindo(a), <%out.println(medicoLogado.getNome());%></h1>
+                    <div class="info_user">
                         
-                        <BR>
+                        <h1 style="margin-top: 35px; margin-bottom:-15px;">Realizar a consulta:</h1>
                         
-                        <h3>DADOS CADASTRAIS:</h3>
+                        <br>
                         
-                        <BR>
-                        
-                        <p>
-                            ID: <%out.println(medicoLogado.getId());%>
-                        </p>
-                        <p>
-                            NOME: <%out.println(medicoLogado.getNome());%>
-                        </p>
-                        <p>
-                            CRM: <%out.println(medicoLogado.getCrm());%>
-                        </p>
-                        <p>
-                            ESTADO CRM: <%out.println(medicoLogado.getEstadoCrm());%>
-                        </p>
-                        <p>
-                            CPF: <%out.println(medicoLogado.getCpf());%>
-                        </p>
-                        <p>
-                            FUNÇÃO: Médico
-                        </p>
-                        <p>
-                            ID TIPO ESPECIALIDADE: <%out.println(medicoLogado.getTipoEspecialidade());%>
-                        </p>
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <div>
+                              Ops! Erro interno ao realizar a consulta.
+                            </div>
+                        </div>
                     </div>
                   </div>
                 </div>
