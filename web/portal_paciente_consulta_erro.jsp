@@ -37,10 +37,10 @@
                       <a class="nav-link active" aria-current="page" href="portal_paciente.jsp">Perfil Cliente</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Listar Consulta</a>
+                      <a class="nav-link active" href="ListaConsultas">Listar Consulta</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="ListaMedicos">Marcar Consulta</a>
+                      <a class="nav-link active" href="#">Marcar Consulta</a>
                     </li>
                   </ul>
                   <span class="navbar-text">
@@ -57,53 +57,15 @@
                   <div class="col">
                     <div class="info-user">
                         <%Paciente pacienteLogado = (Paciente) session.getAttribute("paciente");%>
-                        <h1 style="margin-top: 35px; margin-bottom:15px;">Lista de consultas do(a) paciente <%out.println(pacienteLogado.getNome());%>:</h1>
+                        <h1 style="margin-top: 35px; margin-bottom:15px;">Marcar consulta:</h1>
                         
                         <br>
                         
-                        <%
-                        ArrayList<Consulta> ListaConsulta = (ArrayList<Consulta>) request.getAttribute("listaConsultas");
-                        
-                        if(ListaConsulta.size()>0){
-                        %>
-                        
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">DATA</th>
-                                    <th scope="col">DESCRIÇÃO</th>
-                                    <th scope="col">REALIZADA</th>
-                                    <th scope="col">ID MÉDICO</th>
-                                    <th scope="col">ID PACIENTE</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <%
-                                      for(int i = 0; i < ListaConsulta.size() ; i++){
-                                          Consulta consul = ListaConsulta.get(0);
-                                  %>
-                                  <tr>
-                                    <th scope="row"> <%out.print(consul.getId());%> </th>
-                                    <td> <%out.print(consul.getData());%></td>
-                                    <td> <%out.print(consul.getDesc());%> </td>
-                                    <td> <%out.print(consul.getRealizada());%> </td>
-                                    <td> <%out.print(consul.getIdMedico());%> </td>
-                                    <td> <%out.print(consul.getIdPaciente());%> </td>
-                                  </tr>
-                                  <%
-                                    }
-                                  %>
-                                </tbody>
-                              </table>
-                          </div>
-                          <%    
-                          }else{%>
-                            <div class="alert alert-primary" role="alert">
-                                Você não possui nenhuma consulta.
+                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                            <div>
+                              Ops! Um erro ocorreu.
                             </div>
-                          <%}%>
+                        </div>
                         
                     </div>
                   </div>

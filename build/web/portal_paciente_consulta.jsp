@@ -1,3 +1,4 @@
+<%@page import="aplicacao.Medico"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="aplicacao.Consulta"%>
 <%@page import="aplicacao.Consulta"%>
@@ -37,10 +38,10 @@
                       <a class="nav-link active" aria-current="page" href="portal_paciente.jsp">Perfil Cliente</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Listar Consulta</a>
+                      <a class="nav-link active" href="ListaConsultas">Listar Consulta</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="ListaMedicos">Marcar Consulta</a>
+                      <a class="nav-link active" href="#">Marcar Consulta</a>
                     </li>
                   </ul>
                   <span class="navbar-text">
@@ -57,53 +58,48 @@
                   <div class="col">
                     <div class="info-user">
                         <%Paciente pacienteLogado = (Paciente) session.getAttribute("paciente");%>
-                        <h1 style="margin-top: 35px; margin-bottom:15px;">Lista de consultas do(a) paciente <%out.println(pacienteLogado.getNome());%>:</h1>
+                        <h1 style="margin-top: 35px; margin-bottom:-15px;">Marcar consulta:</h1>
                         
                         <br>
                         
-                        <%
-                        ArrayList<Consulta> ListaConsulta = (ArrayList<Consulta>) request.getAttribute("listaConsultas");
+                        <form action="MarcaConsulta" method="POST" class="formulario">
                         
-                        if(ListaConsulta.size()>0){
-                        %>
-                        
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">DATA</th>
-                                    <th scope="col">DESCRIÇÃO</th>
-                                    <th scope="col">REALIZADA</th>
-                                    <th scope="col">ID MÉDICO</th>
-                                    <th scope="col">ID PACIENTE</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <%
-                                      for(int i = 0; i < ListaConsulta.size() ; i++){
-                                          Consulta consul = ListaConsulta.get(0);
-                                  %>
-                                  <tr>
-                                    <th scope="row"> <%out.print(consul.getId());%> </th>
-                                    <td> <%out.print(consul.getData());%></td>
-                                    <td> <%out.print(consul.getDesc());%> </td>
-                                    <td> <%out.print(consul.getRealizada());%> </td>
-                                    <td> <%out.print(consul.getIdMedico());%> </td>
-                                    <td> <%out.print(consul.getIdPaciente());%> </td>
-                                  </tr>
-                                  <%
-                                    }
-                                  %>
-                                </tbody>
-                              </table>
-                          </div>
-                          <%    
-                          }else{%>
-                            <div class="alert alert-primary" role="alert">
-                                Você não possui nenhuma consulta.
+                            <div class="mb-3">
+                                <label for="data" class="form-label">Escolha uma data*</label>
+                                <input type="date" name="data" class="form-control" required>
                             </div>
-                          <%}%>
+                            
+                            <div class="mb-3">
+                                <label for="hora" class="form-label">Escolha um horário*</label>
+                                <input type="time" name="hora" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="funcao" class="form-label">Escolha um Médico (Escpecialidade)*</label>
+                                <select class="form-select" aria-label="Default select example" required>
+                                    <option selected disabled value="">Escolha uma opção</option>
+                                    <%
+                                    ArrayList<Medico> ListaMedico = (ArrayList<Medico>) request.getAttribute("listaMedicos");
+
+                                    if(ListaMedico.size()>0){
+                                        
+                                       int c;
+                                    
+                                      for(int i = 0; i < ListaMedico.size() ; i++){
+                                          Medico medic = ListaMedico.get(i);
+                                          c = i;
+                                    %>
+                                    <option value="<%c++;%>"><%out.print(medic.getNome());%> (<%out.print(medic.getTipoEspecialidade());%>)</option>
+                                        <%}
+                                    }%>
+                                    
+                                </select>
+                            </div>
+
+                            <div>
+                                <input type="submit" value="Marcar consulta" class="btn btn-primary">
+                            </div>
+                            
+                        </form>
                         
                     </div>
                   </div>

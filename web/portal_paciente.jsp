@@ -37,7 +37,7 @@
                       <a class="nav-link active" href="ListaConsultas">Listar Consulta</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Marcar Consulta</a>
+                      <a class="nav-link active" href="ListaMedicos">Marcar Consulta</a>
                     </li>
                   </ul>
                   <span class="navbar-text">
