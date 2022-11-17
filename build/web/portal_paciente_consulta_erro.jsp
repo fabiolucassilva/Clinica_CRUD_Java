@@ -61,9 +61,9 @@
                         
                         <br>
                         
-                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
                             <div>
-                              Ops! Um erro ocorreu.
+                              Ops! Um erro ocorreu ao marcar uma consulta.
                             </div>
                         </div>
                         

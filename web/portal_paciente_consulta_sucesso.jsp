@@ -61,10 +61,8 @@
                         
                         <br>
                         
-                        <div class="alert alert-danger d-flex align-items-center" role="alert">
-                            <div>
-                              Ops! Um erro ocorreu ao marcar uma consulta.
-                            </div>
+                        <div class="alert alert-primary" role="alert">
+                            Consulta Marcada com Sucesso!
                         </div>
                         
                     </div>

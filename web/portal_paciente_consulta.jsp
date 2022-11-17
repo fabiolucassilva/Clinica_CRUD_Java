@@ -62,7 +62,7 @@
                         
                         <br>
                         
-                        <form action="MarcaConsulta" method="POST" class="formulario">
+                        <form action="PacienteMarcaConsulta" method="POST" class="formulario">
                         
                             <div class="mb-3">
                                 <label for="data" class="form-label">Escolha uma data*</label>
@@ -76,7 +76,7 @@
                             <div class="mb-3">
                                 <label for="funcao" class="form-label">Escolha um Médico (Escpecialidade)*</label>
                                 <select class="form-select" aria-label="Default select example" required>
-                                    <option selected disabled value="">Escolha uma opção</option>
+                                    <option selected disabled value="IdMedico">Escolha uma opção</option>
                                     <%
                                     ArrayList<Medico> ListaMedico = (ArrayList<Medico>) request.getAttribute("listaMedicos");
 
