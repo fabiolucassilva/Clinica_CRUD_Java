@@ -71,15 +71,15 @@
                         
                             <div class="mb-3">
                                 <label for="funcao" class="form-label">Id da Consulta que será realizada (data)*</label>
-                                <select class="form-select" aria-label="Default select example" required>
-                                    <option selected disabled value="IdConsulta">Escolha uma opção</option>
+                                <select class="form-select" name="IdConsulta" aria-label="Default select example" required>
+                                    <option selected disabled >Escolha uma opção</option>
                                     <%
                                     if(ListaConsulta.size()>0){
                                         
                                       for(int i = 0; i < ListaConsulta.size() ; i++){
                                           Consulta consult = ListaConsulta.get(i);
                                     %>
-                                    <option value="<%consult.getId();%>"><%out.print(consult.getId());%> (<%out.print(consult.getData());%>)</option>
+                                    <option value="<%out.print(consult.getId());%>"><%out.print(consult.getId());%> (<%out.print(consult.getData());%>)</option>
                                         <%}
                                     }%>
                                     
@@ -88,8 +88,8 @@
                             
                             <div class="mb-3">
                                 <label for="funcao" class="form-label">Exame da Consulta que será realizada*</label>
-                                <select class="form-select" aria-label="Default select example" required>
-                                    <option selected disabled value="IdTipoExame">Escolha uma opção</option>
+                                <select class="form-select" name="IdTipoExame" aria-label="Default select example" required>
+                                    <option selected disabled value="">Escolha uma opção</option>
                                     <%
                                     ArrayList<TipoExame> ListaTipoExame = (ArrayList<TipoExame>) request.getAttribute("listaTipoExame");
                         
@@ -98,7 +98,7 @@
                                       for(int i = 0; i < ListaTipoExame.size() ; i++){
                                           TipoExame tipoExame = ListaTipoExame.get(i);
                                     %>
-                                    <option value="<%tipoExame.getId();%>"><%out.print(tipoExame.getDesc());%></option>
+                                    <option value="<%out.print(tipoExame.getId());%>"><%out.print(tipoExame.getDesc());%></option>
                                         <%}
                                     }%>
                                 </select>

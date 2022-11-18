@@ -75,8 +75,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="funcao" class="form-label">Escolha um Médico (Escpecialidade)*</label>
-                                <select class="form-select" aria-label="Default select example" required>
-                                    <option selected disabled value="IdMedico">Escolha uma opção</option>
+                                <select class="form-select" name="IdMedico" aria-label="Default select example" required>
+                                    <option selected disabled value="">Escolha uma opção</option>
                                     <%
                                     ArrayList<Medico> ListaMedico = (ArrayList<Medico>) request.getAttribute("listaMedicos");
 
@@ -85,7 +85,7 @@
                                       for(int i = 0; i < ListaMedico.size() ; i++){
                                           Medico medic = ListaMedico.get(i);
                                     %>
-                                    <option value="<%medic.getId();%>"><%out.print(medic.getNome());%> (<%out.print(medic.getTipoEspecialidade());%>)</option>
+                                    <option value="<%out.print(medic.getId());%>"><%out.print(medic.getNome());%> (<%out.print(medic.getTipoEspecialidade());%>)</option>
                                         <%}
                                     }%>
                                     

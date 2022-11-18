@@ -2,6 +2,7 @@ import aplicacao.Medico;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,8 +23,8 @@ public class MarcaConsulta extends HttpServlet {
             throws ServletException, IOException {
         
         /*Pegando as info do form*/
-        String idConsulta = request.getParameter("IdConsulta");
-        String idTipoExame = request.getParameter("IdTipoExame");
+        int idConsulta = parseInt(request.getParameter("IdConsulta"));
+        int idTipoExame = parseInt(request.getParameter("IdTipoExame"));
         String desc = request.getParameter("desc");
 
             Connection conexao = null;
@@ -47,8 +48,8 @@ public class MarcaConsulta extends HttpServlet {
                     PreparedStatement sqlExame = conexao.prepareStatement(sqlInsertExame);
                     
                     sqlExame.setInt(1, idExame);
-                    sqlExame.setInt(2, 3);
-                    sqlExame.setInt(3, 1);
+                    sqlExame.setInt(2, idTipoExame);
+                    sqlExame.setInt(3, idConsulta);
                     
                     sqlExame.executeUpdate();
                     
@@ -56,7 +57,7 @@ public class MarcaConsulta extends HttpServlet {
                     PreparedStatement sqlConsultDesc = conexao.prepareStatement(sqlUpdateConsultDesc);
                     
                     sqlConsultDesc.setString(1, desc);
-                    sqlConsultDesc.setInt(2, 1);
+                    sqlConsultDesc.setInt(2, idConsulta);
                     
                     sqlConsultDesc.executeUpdate();
                     
@@ -64,7 +65,7 @@ public class MarcaConsulta extends HttpServlet {
                     PreparedStatement sqlConsultReal = conexao.prepareStatement(sqlUpdateConsultReal);
                     
                     sqlConsultReal.setString(1, "S");
-                    sqlConsultReal.setInt(2, 1);
+                    sqlConsultReal.setInt(2, idConsulta);
                     
                     sqlConsultReal.executeUpdate();
                     
