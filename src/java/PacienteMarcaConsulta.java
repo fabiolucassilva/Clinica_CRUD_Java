@@ -35,6 +35,7 @@ public class PacienteMarcaConsulta extends HttpServlet {
             response.sendRedirect("portal_paciente_consulta_erro.jsp");
         }*/
         String hora = request.getParameter("hora");
+        String data_hora = data_base + " " + hora;
         
         String medico = request.getParameter("IdMedico");
         int idMedico = parseInt(medico);
@@ -64,7 +65,7 @@ public class PacienteMarcaConsulta extends HttpServlet {
                     PreparedStatement sqlConsulta = conexao.prepareStatement(sqlInsertConsulta);
                     
                     sqlConsulta.setInt(1, idConsulta);
-                    sqlConsulta.setString(2, data_base);
+                    sqlConsulta.setString(2, data_hora);
                     sqlConsulta.setString(3, "");
                     sqlConsulta.setString(4, "N");
                     sqlConsulta.setInt(5, idMedico);

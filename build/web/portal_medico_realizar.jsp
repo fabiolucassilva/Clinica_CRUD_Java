@@ -135,7 +135,7 @@
                                 <tbody>
                                   <%
                                       for(int i = 0; i < ListaConsulta.size() ; i++){
-                                          Consulta consul = ListaConsulta.get(0);
+                                          Consulta consul = ListaConsulta.get(i);
                                   %>
                                   <tr>
                                     <th scope="row"> <%out.print(consul.getId());%> </th>
