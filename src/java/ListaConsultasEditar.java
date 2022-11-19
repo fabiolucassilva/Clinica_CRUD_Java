@@ -1,6 +1,5 @@
 import aplicacao.Consulta;
 import aplicacao.Medico;
-import aplicacao.Paciente;
 import aplicacao.TipoExame;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,9 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = {"/ListaConsultasRealizar"})
-public class ListaConsultasRealizar extends HttpServlet {
 
+@WebServlet(urlPatterns = {"/ListaConsultasEditar"})
+public class ListaConsultasEditar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -48,7 +47,7 @@ public class ListaConsultasRealizar extends HttpServlet {
                     String sqlStringConsult = "select * from consulta where idmedico = ? and realizada = ?";
                     PreparedStatement sqlConsul = conexao.prepareStatement(sqlStringConsult);
                     sqlConsul.setInt(1, id);
-                    sqlConsul.setString(2, "N");
+                    sqlConsul.setString(2, "S");
                     ResultSet resultado_consulta = sqlConsul.executeQuery();
                     
                     String sqlStringTipoExame = "select * from tipoexame";
@@ -56,7 +55,7 @@ public class ListaConsultasRealizar extends HttpServlet {
                     ResultSet resultado_exame = sqlExa.executeQuery();
 
                     if (resultado_consulta == null || resultado_exame == null) {
-                        response.sendRedirect("portal_medico_realizar_erro.jsp");
+                        response.sendRedirect("portal_medico_editar_erro.jsp");
                     }else{
 
                         ArrayList<Consulta> ListaConsulta = new ArrayList<Consulta> ();
@@ -71,28 +70,18 @@ public class ListaConsultasRealizar extends HttpServlet {
                         }
                         
                         request.setAttribute("listaConsultas", ListaConsulta);
-                        
-                        ArrayList<TipoExame> ListaTipoExame = new ArrayList<TipoExame> ();
+                      
 
-                        while (resultado_exame.next()){
-                            TipoExame tipo_exame = new TipoExame(resultado_exame.getInt("ID"),
-                                    resultado_exame.getString("DESCRICAO"));
-
-                            ListaTipoExame.add(tipo_exame);
-                        }
-
-                        request.setAttribute("listaTipoExame", ListaTipoExame);
-
-                        RequestDispatcher rd = request.getRequestDispatcher("/portal_medico_realizar.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("/portal_medico_editar.jsp");
                         rd.forward(request, response);
 
                     }
                 } catch (ClassNotFoundException ex) {
                     /*Não foi possível encontrar o Driver*/
-                    response.sendRedirect("portal_medico_realizar_erro.jsp");
+                    response.sendRedirect("portal_medico_editar_erro.jsp");
                 } catch (SQLException ex) {
                     /*Não foi possível conectar ao banco*/
-                    response.sendRedirect("portal_medico_realizar_erro.jsp");
+                    response.sendRedirect("portal_medico_editar_erro.jsp");
                 }
                 
             } else{
@@ -104,5 +93,4 @@ public class ListaConsultasRealizar extends HttpServlet {
         }
         
     }
-
 }

@@ -42,6 +42,9 @@
                     <li class="nav-item">
                       <a class="nav-link active" href="ListaConsultasRealizar">Realizar Consulta</a>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="ListaConsultasEditar">Editar Consulta</a>
+                    </li>
                   </ul>
                   <span class="navbar-text">
                     <a class="nav-link active" href="ProcessaLogout">

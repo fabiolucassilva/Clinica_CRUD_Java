@@ -1,3 +1,4 @@
+<%@page import="aplicacao.TipoExame"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="aplicacao.Consulta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" import="aplicacao.Medico" %>
@@ -36,7 +37,7 @@
                       <a class="nav-link active" aria-current="page" href="portal_medico.jsp">Perfil Médico</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Ver Consultas</a>
+                      <a class="nav-link active" href="ListaConsultas">Ver Consultas</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link active" href="ListaConsultasRealizar">Realizar Consulta</a>
@@ -59,55 +60,14 @@
                   <div class="col">
                     <div class="info_user">
                         
-                        <%Medico pacienteLogado = (Medico) session.getAttribute("medico");%>
-                        <h1 style="margin-top: 35px; margin-bottom:15px;">Lista de consultas do(a) Médico(a) <%out.println(pacienteLogado.getNome());%>:</h1>
+                        <h1 style="margin-top: 35px; margin-bottom:-15px;">Realizar a consulta:</h1>
                         
-                        <Br>
+                        <br>
                         
-                        <%
-                        ArrayList<Consulta> ListaConsulta = (ArrayList<Consulta>) request.getAttribute("listaConsultas");
-                        
-                        if(ListaConsulta.size()>0){
-                        %>
-                        
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">DATA</th>
-                                    <th scope="col">DESCRIÇÃO</th>
-                                    <th scope="col">REALIZADA</th>
-                                    <th scope="col">ID MÉDICO</th>
-                                    <th scope="col">ID PACIENTE</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <%
-                                      for(int i = 0; i < ListaConsulta.size() ; i++){
-                                          Consulta consul = ListaConsulta.get(i);
-                                  %>
-                                  <tr>
-                                    <th scope="row"> <%out.print(consul.getId());%> </th>
-                                    <td> <%out.print(consul.getData());%></td>
-                                    <td> <%out.print(consul.getDesc());%> </td>
-                                    <td> <%out.print(consul.getRealizada());%> </td>
-                                    <td> <%out.print(consul.getIdMedico());%> </td>
-                                    <td> <%out.print(consul.getIdPaciente());%> </td>
-                                  </tr>
-                                  <%
-                                    }
-                                  %>
-                                </tbody>
-                              </table>
-                          </div>
-                          <%    
-                          }else{%>
-                            <div class="alert alert-primary" role="alert">
-                                Você não possui nenhuma consulta.
-                            </div>
-                          <%}%>
-                        
+                        <div class="alert alert-primary" role="alert">
+                            A Edição da Consulta foi Realizada com Sucesso!
+                        </div>
+                          
                     </div>
                   </div>
                 </div>
