@@ -23,7 +23,9 @@
             
             if(aux.equals("log_medico")){
                 response.sendRedirect("portal_medico.jsp");}
-        
+            else if(aux.equals("log_administrador")){
+                response.sendRedirect("portal_administrador.jsp");
+            }
             else if(aux.equals("log_paciente")){ %>
         
             <nav class="navbar navbar-expand-lg navbar-light bg-light">

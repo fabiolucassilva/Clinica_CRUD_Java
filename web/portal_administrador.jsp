@@ -1,6 +1,4 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="aplicacao.Consulta"%>
-<%@page import="aplicacao.Consulta"%>
+<%@page import="aplicacao.Administrador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" import="aplicacao.Paciente" %>
 
 <!DOCTYPE html>
@@ -22,10 +20,10 @@
             
             if(aux.equals("log_medico")){
                 response.sendRedirect("portal_medico.jsp");}
-            else if(aux.equals("log_administrador")){
-                response.sendRedirect("portal_administrador.jsp");
+            else if(aux.equals("log_paciente")){
+                response.sendRedirect("portal_paciente.jsp");
             }
-            else if(aux.equals("log_paciente")){ %>
+            else if(aux.equals("log_administrador")){ %>
         
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
               <div class="container-fluid">
@@ -36,13 +34,25 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="portal_paciente.jsp">Perfil Cliente</a>
+                      <a class="nav-link active" aria-current="page" href="#">Perfil do Administrador</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="ListaConsultas">Listar Consulta</a>
+                      <a class="nav-link active" href="#">Cadastrar Médico</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Marcar Consulta</a>
+                      <a class="nav-link active" href="#">Cadastrar Pacientes</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">Cadastrar Administradores</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">Cadastrar Tipos de Plano de Saúde</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">Cadastrar as Especialidades Médicas</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">Visualizar consultas</a>
                     </li>
                   </ul>
                   <span class="navbar-text">
@@ -57,15 +67,32 @@
             <div class="container">
                 <div class="row align-items-start">
                   <div class="col">
-                    <div class="info-user">
-                        <%Paciente pacienteLogado = (Paciente) session.getAttribute("paciente");%>
-                        <h1 style="margin-top: 35px; margin-bottom:15px;">Marcar consulta:</h1>
+                    <div class="formulario">
+                        <%Administrador adminLogado = (Administrador) session.getAttribute("administrador");%>
+                        <h1>Bem vindo(a), <%out.println(adminLogado .getNome());%></h1>
                         
+                        <BR>
+                        
+                        <h3>DADOS CADASTRAIS:</h3>
+                        
+                        <BR>
+                        
+                        <p>
+                            ID: <%out.println(adminLogado.getId());%>
+                        </p>
+                        <p>
+                            NOME: <%out.println(adminLogado.getNome());%>
+                        </p>
+                        <p>
+                            CPF: <%out.println(adminLogado.getCpf());%>
+                        </p>
+                        <p>
+                            FUNÇÃO: Administrador
+                        </p>
                         <br>
-                        
-                        <div class="alert alert-primary" role="alert">
-                            Consulta Marcada com Sucesso!
-                        </div>
+                        <p>
+                            OBS: Onde estar o termo cadastrar no menu indica as funções: listar, incluir, alterar e excluir.
+                        </p>
                         
                     </div>
                   </div>

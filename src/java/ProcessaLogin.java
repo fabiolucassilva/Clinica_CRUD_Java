@@ -1,3 +1,4 @@
+import aplicacao.Administrador;
 import aplicacao.Medico;
 import aplicacao.Paciente;
 import java.io.IOException;
@@ -142,7 +143,42 @@ public class ProcessaLogin extends HttpServlet {
                 }
             }else if(request.getParameter("funcao").equals("3")){
                 /*Administrador*/
-                response.sendRedirect("login_funcionalidade.html");
+                Connection conexao = null;
+                try {
+                    //Carrega o Driver JDBC na memória
+                    Class.forName("com.mysql.jdbc.Driver"); //load driver                       
+                    //Abre a conexão com o banco de dados via JDBC
+                    conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinica", "root", "");
+
+                    String sqlString = "select * from administrador where cpf = ? and senha =? limit 1";
+                    PreparedStatement sql = conexao.prepareStatement(sqlString);
+                    sql.setString(1, cpf);
+                    sql.setString(2, senha);
+                    ResultSet resultado = sql.executeQuery();
+                    resultado.last();
+
+                    if (resultado.getRow() > 0) {
+                        Administrador adm = new Administrador(resultado.getInt("ID"),resultado.getString("NOME"),
+                            resultado.getString("CPF"));
+                        
+                        HttpSession session = request.getSession();
+                        
+                        session.setAttribute("log", "log_administrador");
+                        session.setAttribute("administrador", adm);
+
+                        RequestDispatcher rd = request.getRequestDispatcher("/portal_administrador.jsp");
+                        rd.forward(request, response);
+                    }else{
+                        response.sendRedirect("login_erro.html");
+                    }
+                } catch (ClassNotFoundException ex) {
+                    /*Não foi possível encontrar o Driver*/
+                    response.sendRedirect("login_erro_interno.html");
+                } catch (SQLException ex) {
+                    /*Não foi possível conectar ao banco*/
+                    response.sendRedirect("login_erro_interno.html");
+                }
+                /*response.sendRedirect("login_funcionalidade.html");*/
             }else{
                 /*Nenhum*/
                 response.sendRedirect("login_vazio.html");
