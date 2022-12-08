@@ -37,19 +37,19 @@
                       <a class="nav-link active" aria-current="page" href="#">Perfil do Administrador</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Cadastrar Médico</a>
+                      <a class="nav-link active" href="ListaMedicos">Cadastrar Médico</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Cadastrar Pacientes</a>
+                      <a class="nav-link active" href="ListaPacientes">Cadastrar Pacientes</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Cadastrar Administradores</a>
+                      <a class="nav-link active" href="ListaAdministradores">Cadastrar Administradores</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Cadastrar Tipos de Plano de Saúde</a>
+                      <a class="nav-link active" href="ListaTiposPlanos">Cadastrar Tipos de Plano de Saúde</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Cadastrar as Especialidades Médicas</a>
+                      <a class="nav-link active" href="ListaEspecialidades">Cadastrar as Especialidades Médicas</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link active" href="#">Visualizar consultas</a>

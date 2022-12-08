@@ -1,4 +1,5 @@
 import aplicacao.Medico;
+import aplicacao.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -15,22 +16,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = {"/ListaMedicos"})
-public class ListaMedicos extends HttpServlet {
+@WebServlet(urlPatterns = {"/ListaPacientes"})
+public class ListaPacientes extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         HttpSession session = request.getSession();
         
         Object logado = session.getAttribute("log");
         if (logado != null){
             String aux = (String) logado;
             
-            if(aux.equals("log_medico")){
-                response.sendRedirect("login_funcionalidade.html");
-            } else{
+            if(aux.equals("log_administrador")){
+                
                 Connection conexao = null;
                 try {
                     //Carrega o Driver JDBC na memória
@@ -38,7 +37,7 @@ public class ListaMedicos extends HttpServlet {
                     //Abre a conexão com o banco de dados via JDBC
                     conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinica", "root", "");
 
-                    String sqlString = "select * from medico";
+                    String sqlString = "select * from paciente";
 
                     PreparedStatement sql = conexao.prepareStatement(sqlString);
 
@@ -48,26 +47,19 @@ public class ListaMedicos extends HttpServlet {
                         response.sendRedirect("portal_paciente_conulta_erro.jsp");
                     }else{
 
-                        ArrayList<Medico> ListaMedico = new ArrayList<Medico> ();
+                        ArrayList<Paciente> ListaPaciente = new ArrayList<Paciente> ();
 
                         while (resultado.next()){
-                            Medico medico = new Medico(resultado.getInt("ID"),resultado.getString("NOME"),
-                            resultado.getString("CRM"), resultado.getString("ESTADOCRM"),
-                            resultado.getString("CPF"),resultado.getString("AUTORIZADO"),resultado.getInt("IDESPECIALIDADE") );
+                            Paciente paciente = new Paciente(resultado.getInt("ID"),resultado.getString("NOME"),
+                            resultado.getString("CPF"),resultado.getString("AUTORIZADO"),resultado.getInt("IDTIPOPLANO") );
                         
-                            ListaMedico.add(medico);
+                            ListaPaciente.add(paciente);
                         }
 
-                        request.setAttribute("listaMedicos", ListaMedico);
+                        request.setAttribute("listaPacientes", ListaPaciente);
                         
-                        if(aux.equals("log_paciente")){
-                            RequestDispatcher rd = request.getRequestDispatcher("/portal_paciente_consulta.jsp");
-                            rd.forward(request, response);
-                        }
-                        if(aux.equals("log_administrador")){
-                            RequestDispatcher rd = request.getRequestDispatcher("/portal_adm_medico.jsp");
-                            rd.forward(request, response);
-                        }
+                        RequestDispatcher rd = request.getRequestDispatcher("/portal_adm_paciente.jsp");
+                        rd.forward(request, response);
 
                     }
                 } catch (ClassNotFoundException ex) {
@@ -77,11 +69,13 @@ public class ListaMedicos extends HttpServlet {
                     /*Não foi possível conectar ao banco*/
                     response.sendRedirect("portal_paciente_consulta_erro.jsp");
                 }
+                
+            } else{
+                response.sendRedirect("login_funcionalidade.html");
             }
-                   
-        } else{
-            response.sendRedirect("login_restrito.html");
         }
-        
+
+
     }
+    
 }
