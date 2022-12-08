@@ -1,4 +1,6 @@
+import aplicacao.Consulta;
 import aplicacao.Especialidade;
+import aplicacao.Medico;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -37,7 +39,7 @@ public class ListaMedicoEConsulta extends HttpServlet {
                     //Abre a conexão com o banco de dados via JDBC
                     conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinica", "root", "");
 
-                    String sqlString = "select * from especialidade";
+                    String sqlString = "select * from medico";
 
                     PreparedStatement sql = conexao.prepareStatement(sqlString);
 
@@ -47,17 +49,41 @@ public class ListaMedicoEConsulta extends HttpServlet {
                         response.sendRedirect("portal_paciente_conulta_erro.jsp");
                     }else{
 
-                        ArrayList<Especialidade> ListaEspecialidade = new ArrayList<Especialidade> ();
+                        ArrayList<Medico> ListaMedico = new ArrayList<Medico> ();
 
                         while (resultado.next()){
-                            Especialidade especialidade = new Especialidade(resultado.getInt("ID"),resultado.getString("DESCRICAO"));
+                            Medico medico = new Medico(resultado.getInt("ID"),resultado.getString("NOME"),
+                            resultado.getString("CRM"), resultado.getString("ESTADOCRM"),
+                            resultado.getString("CPF"),resultado.getString("AUTORIZADO"),resultado.getInt("IDESPECIALIDADE") );
                         
-                            ListaEspecialidade.add(especialidade);
+                            ListaMedico.add(medico);
                         }
 
-                        request.setAttribute("listaEspecialidades", ListaEspecialidade);
+                        request.setAttribute("listaMedicos", ListaMedico);
                         
-                        RequestDispatcher rd = request.getRequestDispatcher("/portal_adm_especialidades.jsp");
+                        sqlString = "select * from consulta";
+
+                        sql = conexao.prepareStatement(sqlString);
+
+                        resultado = sql.executeQuery();
+
+                        if (resultado == null) {
+                            response.sendRedirect("portal_medico_lista_erro.jsp");
+                        }else{
+
+                            ArrayList<Consulta> ListaConsulta = new ArrayList<Consulta> ();
+
+                            while (resultado.next()){
+                                Consulta consulta = new Consulta(resultado.getInt("ID"),resultado.getString("DATA"),
+                                        resultado.getString("DESCRICAO"), resultado.getString("REALIZADA"),
+                                        resultado.getInt("IDMEDICO"), resultado.getInt("IDPACIENTE") );
+
+                                ListaConsulta.add(consulta);
+                            }
+                        request.setAttribute("listaConsultas", ListaConsulta);
+                        }
+                        
+                        RequestDispatcher rd = request.getRequestDispatcher("/portal_adm_consultas.jsp");
                         rd.forward(request, response);
 
                     }

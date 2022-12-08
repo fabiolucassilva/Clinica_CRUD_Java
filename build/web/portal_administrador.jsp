@@ -52,7 +52,7 @@
                       <a class="nav-link active" href="ListaEspecialidades">Cadastrar as Especialidades Médicas</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="#">Visualizar consultas</a>
+                      <a class="nav-link active" href="ListaMedicoEConsulta">Visualizar consultas</a>
                     </li>
                   </ul>
                   <span class="navbar-text">
